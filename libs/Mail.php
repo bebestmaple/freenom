@@ -48,8 +48,12 @@ class Mail
                 $host = 'smtp.vip.163.com';
                 $secure = 'ssl';
                 $port = 465;
-            } else {
-                throw new \Exception('不受支持的邮箱。目前仅支持谷歌邮箱、QQ邮箱以及163邮箱，推荐使用谷歌邮箱。');
+            } else if (stripos($username, '@126.com') !== false) {
+                $host = 'smtp.126.com';
+                $secure = 'ssl';
+                $port = 465;
+            }else {
+                throw new \Exception('不受支持的邮箱。目前仅支持谷歌邮箱、QQ邮箱、126邮箱以及163邮箱，推荐使用谷歌邮箱。');
             }
 
             self::$mail->SMTPDebug = config('debug') ? 2 : 0; // Debug 0：关闭 1：客户端信息 2：客户端和服务端信息
